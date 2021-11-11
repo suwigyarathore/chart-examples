@@ -22,9 +22,8 @@ function formatData({ date, value }) {
 
 function createChart(data) {
   const { x, y } = creatingAxis(data);
-
-  // console.log(x, y);
   createPoints(data, x, y);
+  createLine(data, x, y);
 }
 
 function creatingAxis(data) {
@@ -66,8 +65,29 @@ function createPoints(data, x, y) {
     .attr("cy", function (d) {
       return y(d.value);
     })
-    .attr("r", 8)
+    .attr("r", 2)
     .attr("stroke", "#69b3a2")
     .attr("stroke-width", 3)
     .attr("fill", "white");
+}
+
+function createLine(data, x, y) {
+  svg
+    .append("path")
+    .datum(data)
+    .attr("fill", "none")
+    .attr("stroke", "black")
+    .attr("stroke-width", 1.5)
+    .attr(
+      "d",
+      d3
+        .line()
+        // .curve(d3.curveBasis) // Just add that to have a curve instead of segments
+        .x(function (d) {
+          return x(d.date);
+        })
+        .y(function (d) {
+          return y(d.value);
+        })
+    );
 }
