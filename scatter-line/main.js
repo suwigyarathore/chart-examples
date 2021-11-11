@@ -82,7 +82,7 @@ function createLine(data, x, y) {
       "d",
       d3
         .line()
-        // .curve(d3.curveBasis) // Just add that to have a curve instead of segments
+        .curve(d3.curveBasis) // Just add that to have a curve instead of segments
         .x(function (d) {
           return x(d.date);
         })
@@ -90,4 +90,18 @@ function createLine(data, x, y) {
           return y(d.value);
         })
     );
+}
+
+function createTooltip() {
+  var Tooltip = d3
+    .select("#scatter-line")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("background-color", "white")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "5px")
+    .style("padding", "5px");
+  return Tooltip;
 }
