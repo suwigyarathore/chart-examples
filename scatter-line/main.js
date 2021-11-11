@@ -10,3 +10,15 @@ var svg = d3
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+console.log(d3);
+
+const url =
+  "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/connectedscatter.csv";
+
+d3.csv(url, formatData);
+
+function formatData(data) {
+  console.log(data);
+  return data;
+}
