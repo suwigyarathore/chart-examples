@@ -22,7 +22,8 @@ function formatData({ date, value }) {
 
 function createChart(data) {
   const { x, y } = creatingAxis(data);
-  createPoints(data, x, y);
+  const Tooltip = createTooltip();
+  createPoints(data, x, y, Tooltip);
   createLine(data, x, y);
 }
 
@@ -50,7 +51,19 @@ function creatingAxis(data) {
   };
 }
 
-function createPoints(data, x, y) {
+function createPoints(data, x, y, Tooltip) {
+  var mouseover = function () {
+    Tooltip.style("opacity", 1);
+  };
+  var mousemove = function (d) {
+    Tooltip.html("Exact value: " + d.value)
+      .style("left", d3.mouse(this)[0] + 70 + "px")
+      .style("top", d3.mouse(this)[1] + "px");
+  };
+  var mouseleave = function (d) {
+    Tooltip.style("opacity", 0);
+  };
+
   svg
     .append("g")
     .selectAll("dot")
@@ -61,14 +74,16 @@ function createPoints(data, x, y) {
     .attr("cx", function (d) {
       return x(d.date);
     })
-    .transition()
     .attr("cy", function (d) {
       return y(d.value);
     })
-    .attr("r", 2)
+    .attr("r", 8)
     .attr("stroke", "#69b3a2")
     .attr("stroke-width", 3)
-    .attr("fill", "white");
+    .attr("fill", "white")
+    .on("mouseover", mouseover)
+    .on("mousemove", mousemove)
+    .on("mouseleave", mouseleave);
 }
 
 function createLine(data, x, y) {
@@ -103,5 +118,7 @@ function createTooltip() {
     .style("border-width", "2px")
     .style("border-radius", "5px")
     .style("padding", "5px");
+
+  console.log(Tooltip);
   return Tooltip;
 }
