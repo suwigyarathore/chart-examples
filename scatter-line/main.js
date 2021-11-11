@@ -11,14 +11,17 @@ var svg = d3
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-console.log(d3);
+const timeFormatter = d3.timeFormat("%Y-%b-%d");
 
 const url =
   "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/connectedscatter.csv";
 
-d3.csv(url, formatData);
+d3.csv(url, formatData, createChart);
 
-function formatData(data) {
+function formatData({ date, value }) {
+  return { date: timeFormatter(new Date(date)), value: +value };
+}
+
+function createChart(data) {
   console.log(data);
-  return data;
 }
