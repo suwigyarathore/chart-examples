@@ -42,3 +42,17 @@ svg
   .attr("stroke", "black")
   .style("stroke-width", "2px")
   .style("opacity", 0.7);
+
+svg
+  .selectAll("mySlices")
+  .data(data_ready)
+  .enter()
+  .append("text")
+  .text(function (d) {
+    return "grp " + d.data.key;
+  })
+  .attr("transform", function (d) {
+    return "translate(" + arcGenerator.centroid(d) + ")";
+  })
+  .style("text-anchor", "middle")
+  .style("font-size", 17);
