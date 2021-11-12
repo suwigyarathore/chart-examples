@@ -18,3 +18,14 @@ var svg = d3
 var data = { a: 9, b: 20, c: 30, d: 8, e: 12 };
 
 var color = d3.scaleOrdinal().domain(data).range(d3.schemeSet2);
+
+//The pie generator does not produce a shape directly,
+//but instead computes the necessary angles to represent a tabular dataset as a pie or donut chart;
+//these angles can then be passed to an arc generator.
+
+var pie = d3.pie().value(function (d) {
+  return d.value;
+});
+var data_ready = pie(d3.entries(data));
+
+console.log(data_ready);
