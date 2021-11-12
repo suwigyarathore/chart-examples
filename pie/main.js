@@ -28,4 +28,17 @@ var pie = d3.pie().value(function (d) {
 });
 var data_ready = pie(d3.entries(data));
 
-console.log(data_ready);
+var arcGenerator = d3.arc().innerRadius(0).outerRadius(radius);
+
+svg
+  .selectAll("mySlices")
+  .data(data_ready)
+  .enter()
+  .append("path")
+  .attr("d", arcGenerator)
+  .attr("fill", function (d) {
+    return color(d.data.key);
+  })
+  .attr("stroke", "black")
+  .style("stroke-width", "2px")
+  .style("opacity", 0.7);
