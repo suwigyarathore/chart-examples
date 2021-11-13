@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>D3 v4 - Music viz</title>
+    <style>
+      html,
+      body,
+      #svg {
+        background-color: #130c0e;
+      }
+      button {
+        font-size: 14px;
+        background: #130c0e;
+        color: #2c7bb6;
+        border: none;
+        outline: none;
+        padding: 4px 8px;
+        letter-spacing: 1px;
+      }
+      button:hover {
+        background: #2c7bb6;
+        color: #130c0e;
+      }
+    </style>
+  </head>
+
+  <body>
+    <audio id="audioElement" src="/music/audio/squid-game.mp3"></audio>
+    <div>
+      <button onclick="document.getElementById('audioElement').play()">
+        Play &#9658;
+      </button>
+      <button onclick="document.getElementById('audioElement').pause()">
+        Pause ||
+      </button>
+      <button onclick="document.getElementById('audioElement').volume+=0.5">
+        Vol +
+      </button>
+      <button onclick="document.getElementById('audioElement').volume-=0.5">
+        Vol -
+      </button>
+      <button onclick="processChart()">Show Sick Equlaizer</button>
+      <button onclick="processChart2()">Show Super Sick Equlaizer</button>
+    </div>
+
+    <script src="https:///d3js.org/d3.v4.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
